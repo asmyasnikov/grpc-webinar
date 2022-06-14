@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  auth:
+    build:
+      dockerfile: Dockerfile.auth
+      context: ../
+      target: dev
+  storage:
+    build:
+      dockerfile: Dockerfile.storage
+      context: ../
+      target: dev
+  logger:
+    build:
+      dockerfile: Dockerfile.logger
+      context: ../
+      target: dev
+  web:
+    build:
+      dockerfile: Dockerfile.web
+      context: ../
+      target: dev
+  nginx:
+    image: nginx:1.21.6
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/usr/share/nginx/html

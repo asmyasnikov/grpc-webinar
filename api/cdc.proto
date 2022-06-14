@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package cdc;
+
+option go_package = "./cdc";
+
+message Data {
+  string Id = 1;
+  bytes Raw = 2;
+}
+
+message ListenRequest {}
+
+message ListenResponse {
+  enum EventType {
+    Created = 0;
+    Updated = 1;
+    Deleted = 2;
+  }
+  EventType Event = 1;
+  Data Data = 2;
+}
+
+service CDC {
+  rpc Listen(ListenRequest) returns (stream ListenResponse) {}
+}
